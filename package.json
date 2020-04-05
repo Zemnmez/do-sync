@@ -1,8 +1,9 @@
 {
   "name": "do-sync",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "synchronously execute asynchronous functions",
   "repository": "https://github.com/Zemnmez/do-sync",
+  "main": "dist/index.js",
   "author": "zemnmez",
   "license": "MIT",
   "devDependencies": {
@@ -20,5 +21,10 @@
     "build": "tsc",
     "prepack": "yarn test && yarn tsc",
     "test": "jest"
-  }
+  },
+  "keywords": [
+    "node",
+    "babel-plugin-macros",
+    "async"
+  ]
 }
