@@ -1,6 +1,6 @@
 import crossSpawn from 'cross-spawn';
 
-export type JSONPrimitive = string | number | boolean | null;
+export type JSONPrimitive = string | number | boolean | null | undefined;
 export type JSONValue = JSONObject | JSONArray | JSONPrimitive;
 export interface JSONObject extends Record<string, JSONValue> { }
 export type JSONArray = JSONValue[];

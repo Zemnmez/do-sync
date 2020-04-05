@@ -7,7 +7,7 @@ const resized = "/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhs
 const fn = async (a: string, b: number, c: string) =>
     `${a}${b}${c}`;
 
-interface resizeOpts extends JSONObject {
+interface resizeOpts extends sharpT.JpegOptions, JSONObject {
     width: number, height: number
 }
 
