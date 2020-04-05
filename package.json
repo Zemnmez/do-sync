@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepack": "yarn test && yarn tsc",
+    "prepack": "yarn test --collectCoverage && yarn tsc",
     "test": "jest"
   },
   "keywords": [
