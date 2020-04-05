@@ -1,7 +1,7 @@
 do-sync
 ========
 
-`do-sync` is a small library that allows certian kinds of async functions to be executed synchronously.
+`do-sync` is a small library that allows certian kinds of async functions to be executed synchronously in node.
 
 Why Though? Isn't this a terrible idea?
 ---------------------------------------

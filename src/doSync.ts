@@ -5,11 +5,13 @@ type JSONValue = JSONPrimitive | JSONObject | JSONArray;
 type JSONObject = { [member: string]: JSONValue };
 type JSONArray = JSONValue[];
 
-export type AsyncFn<I extends JSONPrimitive[] = JSONPrimitive[], O extends JSONPrimitive = JSONPrimitive> =
+export type Value = JSONValue
+
+export type AsyncFn<I extends Value[] = Value[], O extends Value = Value> =
     (...v: I) => Promise<O>
 
 const gen:
-    (input: JSONPrimitive[], fn: AsyncFn<any, any>) => string
+    (input: Value[], fn: AsyncFn<any, any>) => string
 =
     (input, fn) => `
 const main = async () => {
@@ -21,7 +23,7 @@ main().catch(e => console.error(e));
 ;
 
 export const doSync:
-    <I extends JSONPrimitive[], O extends JSONPrimitive>(f: AsyncFn<I,O>) =>
+    <I extends Value[], O extends Value>(f: AsyncFn<I,O>) =>
         (...ip: I) => O
 =
     fn => (...ip) => {

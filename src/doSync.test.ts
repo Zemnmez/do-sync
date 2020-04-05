@@ -1,4 +1,4 @@
-import { doSync } from './index';
+import { doSync } from '.';
 
 const fn = async (a: string, b: number, c: string) =>
     `${a}${b}${c}`;
