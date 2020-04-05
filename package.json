@@ -1,0 +1,24 @@
+{
+  "name": "do-sync",
+  "version": "1.0.0",
+  "description": "synchronously execute asynchronous functions",
+  "repository": "https://github.com/Zemnmez/do-sync",
+  "author": "zemnmez",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.1",
+    "@types/jest": "^25.2.1",
+    "@types/node": "^13.11.0",
+    "jest": "^25.2.7",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "cross-spawn": "^7.0.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepack": "yarn test && yarn tsc",
+    "test": "jest"
+  }
+}
