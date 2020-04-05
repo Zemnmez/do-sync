@@ -12,17 +12,27 @@ Example
 -------
 
 ```typescript
-import { doSync, AsyncFn } from 'do-sync';
+import { doSync, AsyncFn, JSONObject } from 'do-sync';
 
-const resize: AsyncFn = (target: string, width: number, height: number) => {
-    const sharp = require('sharp');
-    return sharp(target)
-        .resize(width, height)
-        .toBuffer()
-        .toString('base64')
+interface resizeOpts extends JSONObject {
+    width: number, height: number
 }
 
-const myImage = doSync(resize)('cool.png', {
+interface resizeRet extends JSONObject {
+    width: number, height: number, blob: string,
+}
+
+const resize = doSync(async (target: string, { width, height, ...jpegOpions }: resizeOpts): Promise<resizeRet> => {
+    const sharp = require('sharp');
+    const blob = 
+        (await sharp(Buffer.from(target, 'base64'))
+            .resize(width, height)
+            .jpeg(jpegOpions)
+            .toBuffer()).toString('base64');
+    return { blob, width, height };
+})
+
+const myImage = resize('cool.png', {
     width: 10, height: 10
 })
 ```

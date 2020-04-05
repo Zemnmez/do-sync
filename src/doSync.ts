@@ -1,14 +1,16 @@
 import crossSpawn from 'cross-spawn';
 
-type JSONPrimitive = string | number | boolean | null;
-type JSONValue = JSONPrimitive | JSONObject | JSONArray;
-type JSONObject = { [member: string]: JSONValue };
-type JSONArray = JSONValue[];
+export type JSONPrimitive = string | number | boolean | null;
+export type JSONValue = JSONObject | JSONArray | JSONPrimitive;
+export interface JSONObject extends Record<string, JSONValue> { }
+export type JSONArray = JSONValue[];
+
 
 export type Value = JSONValue
 
-export type AsyncFn<I extends Value[] = Value[], O extends Value = Value> =
+export type AsyncFn<I extends Value[], O extends Value> =
     (...v: I) => Promise<O>
+
 
 const gen:
     (input: Value[], fn: AsyncFn<any, any>) => string
@@ -23,7 +25,7 @@ main().catch(e => console.error(e));
 ;
 
 export const doSync:
-    <I extends Value[], O extends Value>(f: AsyncFn<I,O>) =>
+    <IK extends Value, I extends IK[], O extends Value>(f: AsyncFn<I,O>) =>
         (...ip: I) => O
 =
     fn => (...ip) => {
