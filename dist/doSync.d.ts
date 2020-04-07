@@ -1,4 +1,4 @@
-export declare type JSONPrimitive = string | number | boolean | null;
+export declare type JSONPrimitive = string | number | boolean | null | undefined;
 export declare type JSONValue = JSONObject | JSONArray | JSONPrimitive;
 export interface JSONObject extends Record<string, JSONValue> {
 }

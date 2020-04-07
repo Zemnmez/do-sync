@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1586128435482" clover="3.2.0">
-  <project timestamp="1586128435482" name="All files">
+<coverage generated="1586128599577" clover="3.2.0">
+  <project timestamp="1586128599577" name="All files">
     <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="3" elements="19" coveredelements="17" complexity="0" loc="12" ncloc="12" packages="1" files="2" classes="2"/>
     <file name="doSync.ts" path="/mnt/c/Users/thoma/Documents/devel/do-sync/src/doSync.ts">
       <metrics statements="10" coveredstatements="10" conditionals="4" coveredconditionals="2" methods="3" coveredmethods="3"/>

@@ -41,5 +41,8 @@ Limitations
 -----------
 - The function will be completely extracted from its scope context. It is run as though it was on its own, in its own file.
 - Only JSON serializible parameters and response values are allowed.
+- Typescript will enforce JSON serializibility, but as a result
+pure `Object`s passed into functions, or returned by functions must extend
+or implement JSONObject.
 
 [1]: https://github.com/kentcdodds/babel-plugin-macros/issues/62#issuecomment-387155622
