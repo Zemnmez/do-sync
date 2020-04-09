@@ -20,12 +20,12 @@ DA:56,2
 DA:60,1
 LF:10
 LH:10
-BRDA:53,0,0,0
-BRDA:53,0,1,2
+BRDA:53,0,0,1
+BRDA:53,0,1,1
 BRDA:54,1,0,0
 BRDA:54,1,1,2
 BRF:4
-BRH:2
+BRH:3
 end_of_record
 TN:
 SF:src/index.ts

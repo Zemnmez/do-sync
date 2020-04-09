@@ -28,7 +28,7 @@ exports.doSync = fn => (...ip) => {
     if (stderr)
         console.error(stderr);
     if (proc.error)
-        throw Error;
+        throw proc.error;
     return JSON.parse(proc.stdout.toString('utf-8'));
 };
 exports.default = exports.doSync;

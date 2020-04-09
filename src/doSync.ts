@@ -51,7 +51,7 @@ export const doSync:
 
         const stderr = proc.stderr.toString('utf-8').trim();
         if (stderr) console.error(stderr);
-        if (proc.error) throw Error;
+        if (proc.error) throw proc.error;
         
         return JSON.parse(proc.stdout.toString('utf-8'));
     }
