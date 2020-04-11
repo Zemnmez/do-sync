@@ -46,3 +46,20 @@ pure `Object`s passed into functions, or returned by functions must extend
 or implement JSONObject.
 
 [1]: https://github.com/kentcdodds/babel-plugin-macros/issues/62#issuecomment-387155622
+
+
+Footguns
+--------
+### ENOBUFS
+`do-sync` uses a node subprocess and writes all code to STDIN.
+`child_process.spawnSync` has a default limit on STDIN input
+which can, if large JSON is transiting STDIN make your program
+explode. `doSync` takes an optional second parameter, `opts`,
+which has the same options as `spawnSync` -- you can set maxBuffer
+to something big enough to prevent issues:
+
+```typescript
+doSync(myFunc, {
+    maxBuffer: 1024 * 1024 * 1024
+})
+```

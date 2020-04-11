@@ -1,4 +1,5 @@
 import crossSpawn from 'cross-spawn';
+import { SpawnSyncOptions } from 'child_process';
 
 export type JSONPrimitive = string | number | boolean | null | undefined;
 export type JSONValue = JSONObject | JSONArray | JSONPrimitive;
@@ -31,6 +32,7 @@ main().catch(e => console.error(e));
 `
 ;
 
+export interface DoSyncOptions extends SpawnSyncOptions { }
 /**
  * doSync returns a synchronous version of certian
  * special asynchronous functions by extracting them
@@ -41,12 +43,14 @@ main().catch(e => console.error(e));
  * scopes (i.e. file-defined variables) to function.
  */
 export const doSync:
-    <I extends Value[], O extends Value>(f: AsyncFn<I,O>) =>
+    <I extends Value[], O extends Value>(f: AsyncFn<I,O>, opts?: DoSyncOptions) =>
         (...ip: I) => O
 =
-    fn => (...ip) => {
+    (fn, { maxBuffer = 1000 * 1024 * 1024, ...etc}: DoSyncOptions = {}) => (...ip) => {
         const proc = crossSpawn.sync('node', ['-'], {
-            input: gen(ip, fn)
+            input: gen(ip, fn),
+            maxBuffer,
+            ...etc
         });
 
         const stderr = proc.stderr.toString('utf-8').trim();
