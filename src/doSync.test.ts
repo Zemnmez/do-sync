@@ -44,4 +44,11 @@ describe('doSync', () => {
     test('basic', () => {
         expect(doSync(fn)('ok', 1, 'ok'))
     });
+
+    test('error handling', () => {
+        expect(() => doSync(() => { throw "whoopsie" })())
+            .toThrow();
+        expect(() => doSync(() => { throw "whoopsie" })())
+            .toThrow("whoopsie" as any);
+    });
 });
