@@ -11,6 +11,7 @@
     "@types/jest": "^25.2.1",
     "@types/node": "^13.11.0",
     "@types/sharp": "^0.24.0",
+    "concurrently": "^6.1.0",
     "jest": "^25.2.7",
     "sharp": "^0.25.2",
     "ts-jest": "^25.3.1",
@@ -21,7 +22,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepack": "yarn test --collectCoverage && yarn tsc",
+    "prepack": "yarn concurrently 'yarn coverage' 'yarn build'",
+    "coverage": "yarn test --coverageThreshold 100",
     "test": "jest"
   },
   "keywords": [
