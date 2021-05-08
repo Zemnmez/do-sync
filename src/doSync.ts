@@ -7,6 +7,13 @@ export interface JSONObject extends Record<string, JSONValue> { }
 export type JSONArray = JSONValue[];
 
 
+type ResponseType = "success" | "failure";
+
+interface Response {
+    type: ResponseType,
+    value: JSONValue
+}
+
 /**
  * Value represents data that can safely be input to,
  * or returned from a doSync() function.
@@ -25,10 +32,10 @@ const gen:
 =
     (input, fn) => `
 const main = async () => {
-    console.log(JSON.stringify(await (${fn})(...${JSON.stringify(input)})));
+    console.log(JSON.stringify({ type: "success", value: await (${fn})(...${JSON.stringify(input)}) }));
 }
 
-main().catch(e => console.error(e));
+main().catch(e => console.log(JSON.stringify({ type: "failure", value: e })));
 `
 ;
 
@@ -57,7 +64,10 @@ export const doSync:
         if (stderr) console.error(stderr);
         if (proc.error) throw proc.error;
         
-        return JSON.parse(proc.stdout.toString('utf-8'));
+        const rsp: Response = JSON.parse(proc.stdout.toString('utf-8'));
+
+        if (rsp.type == "failure") throw rsp.value;
+        return rsp.value as any;
     }
 ;
 

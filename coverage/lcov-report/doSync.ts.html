@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.31% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/13</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -116,7 +116,21 @@
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -140,7 +154,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,26 +185,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">import crossSpawn from 'cross-spawn';
+import { SpawnSyncOptions } from 'child_process';
 &nbsp;
 export type JSONPrimitive = string | number | boolean | null | undefined;
 export type JSONValue = JSONObject | JSONArray | JSONPrimitive;
 export interface JSONObject extends Record&lt;string, JSONValue&gt; { }
 export type JSONArray = JSONValue[];
 &nbsp;
+&nbsp;
+type ResponseType = "success" | "failure";
+&nbsp;
+interface Response {
+    type: ResponseType,
+    value: JSONValue
+}
 &nbsp;
 /**
  * Value represents data that can safely be input to,
@@ -201,13 +237,14 @@ const gen:
 =
     (input, fn) =&gt; `
 const main = async () =&gt; {
-    console.log(JSON.stringify(await (${fn})(...${JSON.stringify(input)})));
+    console.log(JSON.stringify({ type: "success", value: await (${fn})(...${JSON.stringify(input)}) }));
 }
 &nbsp;
-main().catch(e =&gt; console.error(e));
+main().catch(e =&gt; console.log(JSON.stringify({ type: "failure", value: e })));
 `
 ;
 &nbsp;
+export interface DoSyncOptions extends SpawnSyncOptions { }
 /**
  * doSync returns a synchronous version of certian
  * special asynchronous functions by extracting them
@@ -218,19 +255,24 @@ main().catch(e =&gt; console.error(e));
  * scopes (i.e. file-defined variables) to function.
  */
 export const doSync:
-    &lt;I extends Value[], O extends Value&gt;(f: AsyncFn&lt;I,O&gt;) =&gt;
+    &lt;I extends Value[], O extends Value&gt;(f: AsyncFn&lt;I,O&gt;, opts?: DoSyncOptions) =&gt;
         (...ip: I) =&gt; O
 =
-    fn =&gt; (...ip) =&gt; {
+    (fn, { maxBuffer = 1000 * 1024 * 1024, ...etc}: DoSyncOptions = {}) =&gt; (...ip) =&gt; {
         const proc = crossSpawn.sync('node', ['-'], {
-            input: gen(ip, fn)
+            input: gen(ip, fn),
+            maxBuffer,
+            ...etc
         });
 &nbsp;
         const stderr = proc.stderr.toString('utf-8').trim();
-        if (stderr) console.error(stderr);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (stderr) <span class="cstat-no" title="statement not covered" >console.error(stderr);</span>
         <span class="missing-if-branch" title="if path not taken" >I</span>if (proc.error) <span class="cstat-no" title="statement not covered" >throw proc.error;</span>
         
-        return JSON.parse(proc.stdout.toString('utf-8'));
+        const rsp: Response = JSON.parse(proc.stdout.toString('utf-8'));
+&nbsp;
+        if (rsp.type == "failure") throw rsp.value;
+        return rsp.value as any;
     }
 ;
 &nbsp;
@@ -241,7 +283,7 @@ export default doSync;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Apr 09 2020 05:29:05 GMT+0100 (British Summer Time)
+                at Sat May 08 2021 18:55:49 GMT+0100 (British Summer Time)
             </div>
         </div>
         <script src="prettify.js"></script>
