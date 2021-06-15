@@ -1,0 +1,15 @@
+name: Automerge security updates
+
+on:
+  pull_request:
+          [ master ]
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: minor
+          github-token: ${{ secrets.mytoken }}
