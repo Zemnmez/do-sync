@@ -26,6 +26,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
       - run: yarn
+      - run: yarn prepack
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
