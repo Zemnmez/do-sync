@@ -23,8 +23,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "prepack": "yarn concurrently 'yarn coverage' 'yarn build'",
-    "coverage": "yarn test --coverageThreshold 100",
+    "prepack": "yarn concurrently 'yarn coverage' 'yarn build' 'yarn validate-actions'",
+    "coverage": "yarn jest --coverageThreshold 100",
     "test": "yarn concurrently 'yarn jest' 'yarn validate-actions'",
     "validate-actions": "yarn yaml-validator .github/workflows/*.yml"
   },
