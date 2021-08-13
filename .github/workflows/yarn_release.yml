@@ -4,7 +4,7 @@ on:
     types: [released]
 jobs:
   build:
-  environment: publish
+    environment: publish
     runs-on: ubuntu-latest
     env:
       cache-name: cache1
