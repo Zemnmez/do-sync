@@ -1,9 +1,10 @@
 name: Pubilish new version
 on:
   release:
-    types: [created]
+    types: [released]
 jobs:
   build:
+  environment: publish
     runs-on: ubuntu-latest
     env:
       cache-name: cache1
@@ -14,7 +15,7 @@ jobs:
       # Setup .npmrc file to publish to npm
       - name: Restore Cache
         uses: actions/cache@v2
-        with: 
+        with:
           path: "yarn-cache-dir"
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
