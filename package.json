@@ -1,6 +1,6 @@
 {
   "name": "do-sync",
-  "version": "3.0.8",
+  "version": "3.0.10",
   "description": "synchronously execute asynchronous functions",
   "repository": "https://github.com/Zemnmez/do-sync",
   "main": "dist/index.js",
