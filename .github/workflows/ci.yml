@@ -43,9 +43,25 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - uses: fastify/github-action-merge-dependabot@v1
+    - name: 'Merge (if dependabot)'
+      uses: fastify/github-action-merge-dependabot@v1
       with:
         github-token: ${{secrets.github_token}}
+  bump-version:
+    runs-on: ubuntu-latest
+    name: Bump version
+    needs: [automerge, test]
+    steps:
+    - name: 'Checkout source code'
+      uses: 'actions/checkout@v2'
+      with:
+        ref: ${{ github.ref }}
+    - name: 'Version bump'
+      uses: 'phips28/gh-action-bump-version@master'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag-prefix: 'v'
   publish:
     name: Yarn publish
     if: github.event_name == 'release'
