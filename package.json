@@ -8,12 +8,12 @@
   "license": "MIT",
   "devDependencies": {
     "@types/cross-spawn": "^6.0.1",
-    "@types/jest": "^25.2.1",
-    "@types/node": "^13.11.0",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.4",
     "@types/sharp": "^0.24.0",
     "concurrently": "^6.1.0",
     "jest": "^25.2.7",
-    "sharp": "^0.25.2",
+    "sharp": "^0.29.2",
     "ts-jest": "^25.3.1",
     "typescript": "^3.8.3",
     "yaml-validator": "^3.0.1"
