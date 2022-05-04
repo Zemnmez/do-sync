@@ -44,11 +44,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+      contents: write
     steps:
     - name: 'Merge (if dependabot)'
       uses: fastify/github-action-merge-dependabot@v1
       with:
-        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        github-token: ${{secrets.GITHUB_TOKEN}}
   bump-version:
     runs-on: ubuntu-latest
     name: Bump version
