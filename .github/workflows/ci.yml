@@ -48,7 +48,7 @@ jobs:
     - name: 'Merge (if dependabot)'
       uses: fastify/github-action-merge-dependabot@v1
       with:
-        github-token: ${{secrets.github_token}}
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   bump-version:
     runs-on: ubuntu-latest
     name: Bump version
