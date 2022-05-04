@@ -50,6 +50,9 @@ jobs:
       uses: fastify/github-action-merge-dependabot@v1
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
+        # Dependabot creates merge commits via rebase
+        # If this isn't added, a rebase will break the merging process.
+        merge-method: merge
   bump-version:
     runs-on: ubuntu-latest
     name: Bump version
