@@ -42,8 +42,6 @@ jobs:
     if: github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'
     needs: test
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     steps:
     - name: 'Merge (if dependabot)'
       uses: fastify/github-action-merge-dependabot@v1
