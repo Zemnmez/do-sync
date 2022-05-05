@@ -5,10 +5,10 @@ name: CI
 on:
   push:
     branches: [ master ]
-    tags:
-      - 'v*' # New versions
   pull_request:
     branches: [ master ]
+  release:
+    types: [released]
 
 jobs:
   test:
@@ -69,8 +69,7 @@ jobs:
         tag-prefix: 'v'
   publish:
     name: Yarn publish
-    # When a push happens to a new version tag, upload it to yarn
-    if: github.event_name == 'push' && github.ref_type == 'tag' && startsWith(github.ref_name, 'v')
+    if: github.event_name == 'release'
     needs: test
     environment: publish
     runs-on: ubuntu-latest
