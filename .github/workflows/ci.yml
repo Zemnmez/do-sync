@@ -69,7 +69,8 @@ jobs:
         tag-prefix: 'v'
   publish:
     name: Yarn publish
-    if: github.event_name == 'release'
+    # When a push happens to a new version tag, upload it to yarn
+    if: github.event_name == 'push' && github.ref_type == 'tag' && startsWith(github.ref_name, 'v')
     needs: test
     environment: publish
     runs-on: ubuntu-latest
