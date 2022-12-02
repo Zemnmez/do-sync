@@ -1,6 +1,9 @@
 do-sync
 ========
 
+NB: This repo is now served by my monorepo ([link](https://github.com/Zemnmez/monorepo/tree/main/ts/do-sync)). This repo is left as-is for archiving and because I don't think GitHub can redirect to part of a new repo.
+
+
 `do-sync` is a small library that allows certian kinds of async functions to be executed synchronously in node.
 
 Why Though? Isn't this a terrible idea?
